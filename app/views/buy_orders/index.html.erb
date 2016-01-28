@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Buy Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Number order</th>
+      <th>Date delivery</th>
+      <th>Date order</th>
+      <th>Payment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @buy_orders.each do |buy_order| %>
+      <tr>
+        <td><%= buy_order.name %></td>
+        <td><%= buy_order.number_order %></td>
+        <td><%= buy_order.date_delivery %></td>
+        <td><%= buy_order.date_order %></td>
+        <td><%= buy_order.payment %></td>
+        <td><%= link_to 'Show', buy_order %></td>
+        <td><%= link_to 'Edit', edit_buy_order_path(buy_order) %></td>
+        <td><%= link_to 'Destroy', buy_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Buy order', new_buy_order_path %>

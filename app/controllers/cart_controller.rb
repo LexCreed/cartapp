@@ -22,15 +22,28 @@ before_action :authenticate_user!, except: [:index]
 
 	def clearCart
 		session[:cart] = nil
+		@products = nil
 		redirect_to :action => :index	
 	end
 
   def index
 	  	if session[:cart] then
 	  		@cart = session[:cart]
+	  		@products =[]
+	  		@cart.each do | id, quantity|
+				@products<<{ product: Product.find_by_id(id),quantity: quantity}
+			end
 		else  
 	  		@cart = {}
+
 	  	end
+	  	#logger.debug @products
+
   end
+   
+   def create
+    
+   end
+
 end
 

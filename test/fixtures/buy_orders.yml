@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  number_order: MyString
+  date_delivery: 2016-01-27
+  date_order: 2016-01-27
+  payment: false
+
+two:
+  name: MyString
+  number_order: MyString
+  date_delivery: 2016-01-27
+  date_order: 2016-01-27
+  payment: false

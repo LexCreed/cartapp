@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @buy_order.name %>
+</p>
+
+<p>
+  <strong>Number order:</strong>
+  <%= @buy_order.number_order %>
+</p>
+
+<p>
+  <strong>Date delivery:</strong>
+  <%= @buy_order.date_delivery %>
+</p>
+
+<p>
+  <strong>Date order:</strong>
+  <%= @buy_order.date_order %>
+</p>
+
+<p>
+  <strong>Payment:</strong>
+  <%= @buy_order.payment %>
+</p>
+
+<%= link_to 'Edit', edit_buy_order_path(@buy_order) %> |
+<%= link_to 'Back', buy_orders_path %>

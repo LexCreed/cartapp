@@ -30,9 +30,14 @@
         <td><%= product.category %></td>
         <td><%= product.subcategory %></td>
         <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
+        
+        <% if user_signed_in?%>
+        <%if current_user.admin? %>
+          <td><%= link_to 'Edit', edit_product_path(product) %></td>
+          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+        <%end%>
+        
         <td><a href="/cart/<%= product.id %>"> Add To Cart</a></td>
       </tr>
       
