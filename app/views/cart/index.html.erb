@@ -22,10 +22,15 @@
 		<p><%= number_to_currency(productTemp.price, :unit =>'$') %></p>
 		<p>Quantity: <%=quantity%></p>
 	</li>
+<br><br>
 	<%total+=quantity*productTemp.price%>
 <% end %>
+<br><br><br>
+
 <p><b><%=number_to_currency(total,:unit =>'$')%></b></p>
  </ul>
-
+ <form accept-charset="UTF-8" action="/cart" method="post">
+ <input type="submit" value="Checkout">
+</form>
 
 

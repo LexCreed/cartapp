@@ -24,6 +24,18 @@
   <strong>Payment:</strong>
   <%= @buy_order.payment %>
 </p>
-
+<p><% @buy_order.products.each do |product| %>
+           <li>
+    
+   
+    <p><%= product.description %></p>
+    <p><%= image_tag product.cover.url(:thumb)%></p>
+    <p><%= number_to_currency(product.price, :unit =>'$') %></p>
+   
+  </li>
+<br><br>
+  
+        <%end%>
+</p>
 <%= link_to 'Edit', edit_buy_order_path(@buy_order) %> |
 <%= link_to 'Back', buy_orders_path %>

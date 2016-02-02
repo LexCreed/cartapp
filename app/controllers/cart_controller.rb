@@ -2,6 +2,7 @@ class CartController < ApplicationController
 
 before_action :authenticate_user!, except: [:index]	
 
+skip_before_action :verify_authenticity_token
 	def add
 	  	id = params[:id]
 
@@ -35,6 +36,7 @@ before_action :authenticate_user!, except: [:index]
 			end
 		else  
 	  		@cart = {}
+	  		@products =[]
 
 	  	end
 	  	#logger.debug @products
@@ -42,7 +44,21 @@ before_action :authenticate_user!, except: [:index]
   end
    
    def create
-    
+   	@buyOrder=BuyOrder.new
+   	if session[:cart] then
+	  		@cart = session[:cart]
+	  		@products =[]
+	  		@cart.each do | id, quantity|
+				@products<<{ product: Product.find_by_id(id),quantity: quantity}
+			end
+    end
+   	#logger.debug @products
+   	@buyOrder.products=@products
+   	logger.debug @buyOrder.products
+   	if @buyOrder.save
+   		redirect_to @buyOrder
+	end
+
    end
 
 end
