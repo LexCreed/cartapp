@@ -10,6 +10,8 @@ class BuyOrdersController < ApplicationController
   # GET /buy_orders/1
   # GET /buy_orders/1.json
   def show
+    @quantyties=HasBuyOrder.where("buy_order_id = ?", params[:id])
+    logger.debug @quantyties
   end
 
   # GET /buy_orders/new

@@ -4,7 +4,7 @@ has_many :products, through: :hasBuyOrders
 after_create :save_products
 def products=(value)
 		@products=value
-		logger.debug @products
+		#logger.debug @products
 end
 def save_products
 		@products.each do |product|
