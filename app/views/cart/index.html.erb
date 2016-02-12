@@ -26,11 +26,14 @@
 	<%total+=quantity*productTemp.price%>
 <% end %>
 <br><br><br>
+<% if user_signed_in?%>
+  <%= link_to 'Keep Buying', products_path %>
+<%end%>
+
+<br><br>
 
 <p><b><%=number_to_currency(total,:unit =>'$')%></b></p>
  </ul>
  <form accept-charset="UTF-8" action="/cart" method="post">
  <input type="submit" value="Checkout">
 </form>
-
-

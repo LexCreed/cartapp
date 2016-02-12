@@ -42,6 +42,7 @@ class BuyOrdersController < ApplicationController
   # PATCH/PUT /buy_orders/1
   # PATCH/PUT /buy_orders/1.json
   def update
+    logger.debug "Person attributes hash: #{@buy_order.id}"
     respond_to do |format|
       if @buy_order.update(buy_order_params)
         format.html { redirect_to @buy_order, notice: 'Buy order was successfully updated.' }
