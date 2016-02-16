@@ -29,37 +29,42 @@ skip_before_action :verify_authenticity_token
 
   def index
 	  	if session[:cart] then
-	  		@cart = session[:cart]
-	  		@products =[]
-	  		@cart.each do | id, quantity|
-				@products<<{ product: Product.find_by_id(id),quantity: quantity}
-			end
+	  		build_cart
 		else  
 	  		@cart = {}
 	  		@products =[]
 
 	  	end
 	  	#logger.debug @products
-
   end
    
    def create
    	@buyOrder=BuyOrder.new
-   	if session[:cart] then
-	  		@cart = session[:cart]
-	  		@products =[]
-	  		@cart.each do | id, quantity|
-				@products<<{ product: Product.find_by_id(id),quantity: quantity}
-			end
-    end
+   	build_cart
    	#logger.debug @products
    	@buyOrder.products=@products
-   	logger.debug @buyOrder.products
+   	time = Time.now
+	date_str=time.to_formatted_s(:short)
+   	@buyOrder.name=current_user.email+"_"+date_str
+   	@buyOrder.date_order=Time.now
+
+   
+
+   #logger.debug @buyOrder.products
    	if @buyOrder.save
    		redirect_to @buyOrder
 	end
 
    end
-
+private
+ def build_cart
+	if session[:cart] then
+	  		@cart = session[:cart]
+	  		@products =[]
+	  		@cart.each do | id, quantity|
+				@products<<{ product: Product.find_by_id(id),quantity: quantity}
+			end
+   end
+end
 end
 

@@ -22,7 +22,7 @@
 
 <p>
   <strong>Payment:</strong>
-  <%= @buy_order.payment %>
+  <%= @buy_order.payment ? 'Pagado' : 'Pendiente'%>
 </p>
 <br><br>
 <% total = 0 %>
@@ -68,11 +68,18 @@
       </ul>
     </div>
   <% end %>
-<div class="field" style="display:none">
+<div class="field" style="display:none" >
     <%= f.label :payment %><br>
-    <%= f.check_box :payment %>
+    <%= f.check_box :payment, {:checked=>true}%>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+   <div class="field" style="display:none">
+    <%= f.label :date_delivery %><br>
+    <%= f.date_select :date_delivery %>
   </div>
+  <% unless @buy_order.payment?%>
+     <div class="actions">
+    <%= f.submit "Pagar" %>
+  </div>
+  <%end%>
+ 
 <% end %>
