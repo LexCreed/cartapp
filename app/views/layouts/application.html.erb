@@ -9,8 +9,8 @@
 <body>
 
 
-<nav id ="nav">
-	<div id="page_nav">
+<nav class="nav">
+	<div class="page_nav">
 		<%= link_to "Home", root_path %>
 		<%= link_to "Shop", products_path %>
 		<%= link_to "Informacion", page_about_path %>
@@ -27,10 +27,10 @@
 	</div>	
 </nav>
 
-<div id="main_wrap">
+<div class="main_wrap">
+	<%= yield %>
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
-	<%= yield %>
 </div>	
 
 </body>

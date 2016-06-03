@@ -12,7 +12,12 @@
 
 <p>
   <strong>Image url:</strong>
-  <%= @product.image_url %>
+  <%if @product.cover?%>
+    <%= image_tag @product.cover.url , class:"t-id"%>   
+  <% else %>
+    <td></td> 
+  <% end %> 
+
 </p>
 
 <p>
@@ -30,5 +35,14 @@
   <%= @product.subcategory %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<div>
+  <h4><a href="/cart/<%= @product.id %>"> Agregar al carrito</a></h4>  
+</div> 
+
+<% if user_signed_in?%>
+  <%if current_user.admin? %>
+    <%= link_to 'Edit', edit_product_path(@product) %> |
+
+  <%end%>
+<%end%>
 <%= link_to 'Back', products_path %>

@@ -1,52 +1,83 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Products</h1>
-<br><br>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Imagen </th>
-      <th>Price</th>
-      <th>Category</th>
-      <th>Subcategory</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.title %></td>
-        <td><%= product.description %></td>
-        <%if product.cover?%>
-          <td><%= image_tag product.cover.url(:thumb)%></td>
-        <% else %>
-        <td></td>  
-        <% end %>
-        <td><%= product.price %></td>
-        <td><%= product.category %></td>
-        <td><%= product.subcategory %></td>
-        
-        <% if user_signed_in?%>
+<div class="row  jumbotron">
+  <div class="container col-xs-12">
+    <div class="text-center">
+      <% if user_signed_in?%>
         <%if current_user.admin? %>
-          <td><%= link_to 'Edit', edit_product_path(product) %></td>
-          <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <h4><%= link_to 'Nuevo Producto', new_product_path %></h4> 
         <%end%>
-        <%end%>
-        
-        <td><a href="/cart/<%= product.id %>"> Add To Cart</a></td>
-      </tr>
-      
-    <% end %>
-  </tbody>
-</table>
+      <%end%>
+    </div>
+  </div>
+  <div class="box">
+    <h1 class="text-center col-xs-12">Lista de Productos</h1>
+  </div> 
+  <div cloass="container ">
+    <div class="text-center ">
+      <div class="main-container">
+        <div class="box">
+          <% @products.each do |product| %>
+            <div class="col-xs-12 col-sm-6 col-md-3 ">
+              <div class="box ">
+                <div class=" ">
+                    <%if product.cover?%>
+                      <%= image_tag product.cover.url, class:"t-index col-xs-6   " %>
+                    <% else %>
+                     <td></td> 
+                    <% end %>                          
+                </div>
+                <div class=""> 
+                  <div>
+                    <h4>
+                       <%= link_to product.title ,product, class:"titulo " %>
+                    </h4>
+                    <p class="text-description">
+                       <%= truncate(product.description, length:50,escape:false) %>
+                    <p>
+                  </div>
+                  <div>
+                    <h4>
+                       $<%= product.price %>
+                    </h4>
+                  </div>
+                  <!--      <div>
+                              <h4>Categoria:</h4> 
+                            <p>
+                               <%= product.category %> 
+                            </p>
+                          </div>
 
-<br>
-<% if user_signed_in?%>
-<%if current_user.admin? %>
-  <%= link_to 'New Product', new_product_path %>
-<%end%>
-<%end%>
+                          <div>
+                            <h4>Subcategoria:</h4> 
+                            <p>
+                              <%= product.subcategory %>
+                            </p>
+                          </div>
+                  -->        
+
+                  <div class="list-inline">
+                    <% if user_signed_in?%>
+                      <%if current_user.admin? %>
+                        <li><%= link_to 'Edit', edit_product_path(product) %></li>
+                        <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                      <%end%>
+                    <%end%>
+                  </div>
+
+                  <div>
+                    <h4><a href="/cart/<%= product.id %>"> Agregar al carrito</a></h4>  
+                  </div> 
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+
+                       
+
+                      
