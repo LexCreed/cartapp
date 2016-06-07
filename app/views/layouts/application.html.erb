@@ -10,13 +10,26 @@
 
 
 <nav class="nav">
-	<div class="page_nav">
+
+    <div class="page_nav">
 		<%= link_to "Home", root_path %>
 		<%= link_to "Shop", products_path %>
 		<%= link_to "Informacion", page_about_path %>
 		<%= link_to "FAQs", page_faqs_path %>
 		<%= link_to "Contacto", page_contact_path %>
 	</div>
+    <div class="page_nav">
+        
+        <% if user_signed_in?%>
+            <a class="thumb pull-left img-responsive" href="/cart">
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                </button>                    
+            </a>
+        <% end %>  
+    </div>
+
+
 	<div id="sign_in"> 
 		<% if user_signed_in?%>
 			<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
@@ -28,9 +41,12 @@
 </nav>
 
 <div class="main_wrap">
-	<%= yield %>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+	<div class="row jumbotron">
+
+		<%= yield %>
+		<p class="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p>
+	</div>	
 </div>	
 
 </body>

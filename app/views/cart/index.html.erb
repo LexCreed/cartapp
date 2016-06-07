@@ -1,39 +1,65 @@
-<h1>Your Cart </h1>
+  <div class="box">
+    <h1 class="text-center col-xs-12">Mi Carrito</h1>
+  </div> 
 
+  <div class="text-center">
+	<% if @cart.empty? %>
+		<h2>Tu carrito esta vacio</h2>
+	<% else %>
+		<%= link_to 'Limpiar Carrito', cart_clear_path, class:"btn btn-primary text-center blanco" %>
+	<%end%>
+  </div>
+	<% total = 0 %>
 
-<% if @cart.empty? %>
-	<p>Your cart is empty</p>
-<% else %>
-	<%= link_to 'Cleanse Your Cart', cart_clear_path %>	
-<%end%>
-<br><br><br>
+	<ul class="col-xs-12">
+		<div class="col-xs-12 col-md-6">
+				
+				<li class="container">
+					<% @products.each do | product | %>
+					<div class"col-md-12" >
+						<%productTemp=product[:product] %>
+							<div class"col-xs-6">
+								<div class="col-md-6 ">
+									<%= image_tag productTemp.cover.url(:thumb), class:"img col-md-12" %>
+								</div>
+								<div class=" ">
+									<h3><%= link_to productTemp.title, productTemp%></h3>					
+			                       <%= truncate(productTemp.description, length:300,escape:false) %>
 
-<% total = 0 %>
+	                   				<%=  %>
+											
+									<div class="list-inline text-center ">
+									<%quantity =product[:quantity]%>
+			 						<h4>
+			 							<%= number_to_currency(productTemp.price, :unit =>'$')  %>
+										| Cantidad: <%=quantity%> 						
+			 						</h4>								
+								</div>
 
- <ul>
-<% @products.each do | product | %>
-	
-	<li>
-		<%productTemp=product[:product] %>
-		<%quantity =product[:quantity]%>
-		<%= link_to productTemp.title, productTemp%>
-		<p><%= productTemp.description %></p>
-		<p><%= image_tag productTemp.cover.url(:thumb)%></p>
-		<p><%= number_to_currency(productTemp.price, :unit =>'$') %></p>
-		<p>Quantity: <%=quantity%></p>
-	</li>
-<br><br>
-	<%total+=quantity*productTemp.price%>
-<% end %>
-<br><br><br>
-<% if user_signed_in?%>
-  <%= link_to 'Keep Buying', products_path %>
-<%end%>
+							</div>
+						</div>
+					</div>
+					<br><br><br>
+				</li>
 
-<br><br>
+			
+				<%total+=quantity*productTemp.price%>
+			<% end %>
+		</div>
 
-<p><b><%=number_to_currency(total,:unit =>'$')%></b></p>
- </ul>
- <form accept-charset="UTF-8" action="/cart" method="post">
- <input type="submit" value="Checkout">
-</form>
+		<div class="col-xs-12 col-md-6 text-right">
+			<div class=" text-center">
+				
+				
+				<p><b><%=number_to_currency(total,:unit =>'$')%></b></p>
+				<% if user_signed_in?%>
+				  <%= link_to 'Seguir comprando', products_path %>
+				<%end%>
+				<br><br>
+				<form accept-charset="UTF-8" action="/cart" method="post">
+					<input type="submit" value="Confirmar compra" , class="btn btn-primary text-center blanco">
+				</form>	
+			</div>		
+		</div>
+
+	</ul>

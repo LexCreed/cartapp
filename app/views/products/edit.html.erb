@@ -1,6 +1,24 @@
-<h1>Editing Product</h1>
+<div>
+	<div class="box">
+		<h1 class="text-center col-xs-12">Editar Producto</h1>
+	</div>
 
-<%= render 'form' %>
+	<div>
+	<%= render 'form' %>	
+	</div>
+ 
+<div class="text-center">
+	<div class="btn btn-primary btn-xs ">	
+		<%= link_to 'Ver', @product, class:"blanco" %> |
+		<%= link_to 'Regresar', products_path,class:"blanco" %>
+	</div>    	
+</div >
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+	
+</div>
+
+
+
+
+
+

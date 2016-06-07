@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-<div class="row  jumbotron">
   <div class="container col-xs-12">
     <div class="text-center">
       <% if user_signed_in?%>
@@ -10,18 +9,18 @@
     </div>
   </div>
   <div class="box">
-    <h1 class="text-center col-xs-12">Lista de Productos</h1>
+    <h1 class="text-center col-xs-12">Productos</h1>
   </div> 
   <div cloass="container ">
     <div class="text-center ">
       <div class="main-container">
         <div class="box">
           <% @products.each do |product| %>
-            <div class="col-xs-12 col-sm-6 col-md-3 ">
-              <div class="box ">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 margen">
+              <div class="box margen text-left">
                 <div class=" ">
                     <%if product.cover?%>
-                      <%= image_tag product.cover.url, class:"t-index col-xs-6   " %>
+                      <%= image_tag product.cover.url, class:"col-xs-6" %>
                     <% else %>
                      <td></td> 
                     <% end %>                          
@@ -32,7 +31,7 @@
                        <%= link_to product.title ,product, class:"titulo " %>
                     </h4>
                     <p class="text-description">
-                       <%= truncate(product.description, length:50,escape:false) %>
+                       <%= truncate(product.description, length:100,escape:false) %>
                     <p>
                   </div>
                   <div>
@@ -58,8 +57,8 @@
                   <div class="list-inline">
                     <% if user_signed_in?%>
                       <%if current_user.admin? %>
-                        <li><%= link_to 'Edit', edit_product_path(product) %></li>
-                        <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                        <li><%= link_to 'Editar', edit_product_path(product) %></li>
+                        <li><%= link_to 'Eliminar', product, method: :delete, data: { confirm: 'Are you sure?' } %></li>
                       <%end%>
                     <%end%>
                   </div>
@@ -75,8 +74,6 @@
       </div>
     </div>  
   </div>
-</div>
-
 
                        
 

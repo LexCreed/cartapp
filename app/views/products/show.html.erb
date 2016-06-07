@@ -1,48 +1,57 @@
 <p id="notice"><%= notice %></p>
-<h1> My Product </h1>
-<p>
-  <strong>Title:</strong>
-  <%= @product.title %>
-</p>
+  <div class="text-right ">
+    <div class="btn btn-info btn-e-r ">
+      <% if user_signed_in?%>
+        <%if current_user.admin? %>
+          <%= link_to 'Editar', edit_product_path(@product) %> |
+        <%end%>
+      <%end%>  
+      <%= link_to 'Regresar', products_path %>
+    </div>    
+  </div>
+            
+  <div class="box">
+    <h1 class="text-center col-xs-12"><%= @product.title %></h1>
+  </div> 
+  <div cloass="container ">
+    <div class="text-center ">
+      <div class="main-container">
+        <div class="box">
+          <div class="col-xs-12 col-sm-6 " >
+            <%if @product.cover?%>
+              <%= image_tag @product.cover.url , class:"t-id"%>   
+            <% else %>
+              <td></td> 
+            <% end %>             
+          </div>        
+          <p class="description-2 text-left">
+            <%= @product.description %>    
+          </p>
+<br><br>
+          <p class="text-left">
+            <strong><%= number_to_currency @product.price %></strong>
+          </p>
+<br><br>
+          <div class="list-inline">
+            <li>
+              <p>
+                Category:
+                <strong><%= @product.category %></strong>              
+              </p>
+            </li>
+            <li>
+              <p>
+                Subcategory:
+                <strong><%= @product.subcategory %></strong>              
+              </p>
+            </li>
+          </div>
+          <div class="btn btn-primary">
+            <h4><a href="/cart/<%= @product.id%>" id="cart_content" class="blanco text-center"> Agregar al carrito</a></h4>  
+          </div>        
+          <div id="cart_content"></div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<p>
-  <strong>Image url:</strong>
-  <%if @product.cover?%>
-    <%= image_tag @product.cover.url , class:"t-id"%>   
-  <% else %>
-    <td></td> 
-  <% end %> 
-
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @product.category %>
-</p>
-
-<p>
-  <strong>Subcategory:</strong>
-  <%= @product.subcategory %>
-</p>
-
-<div>
-  <h4><a href="/cart/<%= @product.id %>"> Agregar al carrito</a></h4>  
-</div> 
-
-<% if user_signed_in?%>
-  <%if current_user.admin? %>
-    <%= link_to 'Edit', edit_product_path(@product) %> |
-
-  <%end%>
-<%end%>
-<%= link_to 'Back', products_path %>
+        </div>
+      </div>
+    </div>  
+  </div>
