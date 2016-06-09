@@ -18,19 +18,25 @@
 		<%= link_to "FAQs", page_faqs_path %>
 		<%= link_to "Contacto", page_contact_path %>
 	</div>
-    <div class="page_nav">
+ 	<div id="sign_in"> 
+    <div class="page_nav list-inline">
         
         <% if user_signed_in?%>
             <a class="thumb pull-left img-responsive" href="/cart">
                 <button type="button" class="btn btn-default" aria-label="Left Align">
                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+						<% if session[:cart] then%>
+							<%=session[:cart].length  %>
+						<%else %>
+							0
+						<%end%>	
                 </button>                    
             </a>
         <% end %>  
     </div>
 
 
-	<div id="sign_in"> 
+
 		<% if user_signed_in?%>
 			<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
 		<% else %>

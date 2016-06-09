@@ -1,65 +1,60 @@
-  <div class="box">
-    <h1 class="text-center col-xs-12">Mi Carrito</h1>
-  </div> 
+<div class="box">
+<h1 class="text-center col-xs-12">Mi Carrito</h1>
+</div> 
 
-  <div class="text-center">
-	<% if @cart.empty? %>
-		<h2>Tu carrito esta vacio</h2>
-	<% else %>
-		<%= link_to 'Limpiar Carrito', cart_clear_path, class:"btn btn-primary text-center blanco" %>
-	<%end%>
-  </div>
-	<% total = 0 %>
+<div class="text-center">
+<% if @cart.empty? %>
+	<h2>Tu carrito esta vacio</h2>
+<% else %>
+	<%= link_to 'Limpiar Carrito', cart_clear_path, class:"btn btn-primary text-center blanco" %>
+<%end%>
+</div>
+<% total = 0 %>
 
-	<ul class="col-xs-12">
-		<div class="col-xs-12 col-md-6">
-				
-				<li class="container">
-					<% @products.each do | product | %>
-					<div class"col-md-12" >
-						<%productTemp=product[:product] %>
-							<div class"col-xs-6">
-								<div class="col-md-6 ">
-									<%= image_tag productTemp.cover.url(:thumb), class:"img col-md-12" %>
-								</div>
-								<div class=" ">
-									<h3><%= link_to productTemp.title, productTemp%></h3>					
-			                       <%= truncate(productTemp.description, length:300,escape:false) %>
+<ul class="col-xs-12">
+	<div class="col-xs-12 col-md-6">
+		<li class="container">
+			<% @products.each do | product | %>
+			<div class"col-md-12" >
+				<%productTemp=product[:product] %>
+					<div class"col-xs-6">
+						<div class="col-md-6 ">
+							<%= image_tag productTemp.cover.url(:thumb), class:"img col-md-12" %>
+						</div>
+						<div class=" ">
+							<h3><%= link_to productTemp.title, productTemp%></h3>					
+	                       <%= truncate(productTemp.description, length:300,escape:false) %>
 
-	                   				<%=  %>
-											
-									<div class="list-inline text-center ">
-									<%quantity =product[:quantity]%>
-			 						<h4>
-			 							<%= number_to_currency(productTemp.price, :unit =>'$')  %>
-										| Cantidad: <%=quantity%> 						
-			 						</h4>								
-								</div>
-
-							</div>
+               				<%=  %>
+									
+							<div class="list-inline text-center ">
+							<%quantity =product[:quantity]%>
+	 						<h4>
+	 							<%= number_to_currency(productTemp.price, :unit =>'$')  %>
+								| Cantidad: <%=quantity%> 						
+	 						</h4>								
 						</div>
 					</div>
-					<br><br><br>
-				</li>
-
+				</div>
+			</div>
+			<br><br><br>
+		</li>		
+			<%total+=quantity*productTemp.price%>
+		<% end %>
+	</div>
+	<div class="col-xs-12 col-md-6 text-right">
+		<div class=" text-center">
 			
-				<%total+=quantity*productTemp.price%>
-			<% end %>
-		</div>
-
-		<div class="col-xs-12 col-md-6 text-right">
-			<div class=" text-center">
-				
-				
-				<p><b><%=number_to_currency(total,:unit =>'$')%></b></p>
-				<% if user_signed_in?%>
-				  <%= link_to 'Seguir comprando', products_path %>
-				<%end%>
-				<br><br>
-				<form accept-charset="UTF-8" action="/cart" method="post">
-					<input type="submit" value="Confirmar compra" , class="btn btn-primary text-center blanco">
-				</form>	
-			</div>		
-		</div>
-
-	</ul>
+			
+			<p><b><%=number_to_currency(total,:unit =>'$')%></b></p>
+			<% if user_signed_in?%>
+			  <%= link_to 'Seguir comprando', products_path %>
+			<%end%>
+			<br><br>
+			<form accept-charset="UTF-8" action="/cart" method="post">
+				<input type="submit" value="Confirmar compra" , class="btn btn-primary text-center blanco">
+			</form>	
+		</div>		
+	</div>
+</ul>
+<%= @cart.length %>
