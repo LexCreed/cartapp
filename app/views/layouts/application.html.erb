@@ -12,37 +12,37 @@
 <nav class="nav">
 
     <div class="page_nav">
-		<%= link_to "Home", root_path %>
 		<%= link_to "Shop", products_path %>
-		<%= link_to "Informacion", page_about_path %>
-		<%= link_to "FAQs", page_faqs_path %>
-		<%= link_to "Contacto", page_contact_path %>
+
+		<div class="collapse navbar-collapse col-sm-12" >
+			<%= link_to "Home", root_path %>
+			<%= link_to "Informacion", page_about_path %>
+			<%= link_to "FAQs", page_faqs_path %>
+			<%= link_to "Contacto", page_contact_path %>
+		</div>
 	</div>
  	<div id="sign_in"> 
-    <div class="page_nav list-inline">
-        
-        <% if user_signed_in?%>
-            <a class="thumb pull-left img-responsive" href="/cart">
-                <button type="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-						<% if session[:cart] then%>
-							<%=session[:cart].length  %>
-						<%else %>
-							0
-						<%end%>	
-                </button>                    
-            </a>
-        <% end %>  
-    </div>
 
 
+	<% if user_signed_in?%>
+		<%= link_to "Salir", destroy_user_session_path, method: :delete %>
+	<% else %>
+		<%= link_to "Entrar", new_user_session_path %>
+		<%= link_to "Crear Cuenta", new_user_registration_path %>
+	<% end %>
 
-		<% if user_signed_in?%>
-			<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-		<% else %>
-			<%= link_to "Sign In", new_user_session_path %>
-			<%= link_to "Sign Up", new_user_registration_path %>
-		<% end %>
+	<% if user_signed_in?%>
+        <a class="thumb pull-left img-responsive" href="/cart">
+            <button type="button" class="btn btn-default" aria-label="Left Align">
+                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+					<% if session[:cart] then%>
+						<%=session[:cart].length  %>
+					<%else %>
+						0
+					<%end%>	
+            </button>                    
+        </a>
+    <% end %>  
 	</div>	
 </nav>
 
@@ -54,6 +54,26 @@
 		<p class="alert"><%= alert %></p>
 	</div>	
 </div>	
+
+
+
+<footer class="footer  bs-docs-footer ">
+    <div class=" ">
+        <div class="f  col-xs-12 col-sm-1">
+        	<div class="visible-xs" >
+            <ul class=" list-inline text-right ">
+                 
+                 <li><%= link_to "Home", root_path, class:"blanco" %></li>
+                 <li><%= link_to "Informacion", page_about_path, class:"blanco" %></li>
+                 <li><%= link_to "FAQs", page_faqs_path, class:"blanco" %></li>
+                 <li><%= link_to "Contacto", page_contact_path, class:"blanco" %></li>
+                 
+            </ul>
+        	</div>
+        </div>
+    </div>
+</footer>
+
 
 </body>
 </html>

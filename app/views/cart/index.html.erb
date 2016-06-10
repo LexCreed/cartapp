@@ -39,22 +39,35 @@
 			</div>
 			<br><br><br>
 		</li>		
+
+<%=@cart.length + quantity -1 %>			
+
+
 			<%total+=quantity*productTemp.price%>
 		<% end %>
 	</div>
 	<div class="col-xs-12 col-md-6 text-right">
 		<div class=" text-center">
-			
-			
 			<p><b><%=number_to_currency(total,:unit =>'$')%></b></p>
 			<% if user_signed_in?%>
-			  <%= link_to 'Seguir comprando', products_path %>
+
+			<% if @cart.empty? %>			
+				<form  action="/products" >
+					<input type="submit" value="Seguir comprando" , class="btn btn-primary text-center blanco">
+				</form>
+			<% else %>			
+				<%= link_to 'Seguir comprando', products_path %>
+			<% end %>
 			<%end%>
 			<br><br>
-			<form accept-charset="UTF-8" action="/cart" method="post">
-				<input type="submit" value="Confirmar compra" , class="btn btn-primary text-center blanco">
-			</form>	
+
+			<% if @cart.empty? %>
+				<p></p>
+			<% else %>
+				<form accept-charset="UTF-8" action="/cart" method="post">
+					<input type="submit" value="Confirmar compra" , class="btn btn-primary text-center blanco">
+				</form>
+			<%end%>
 		</div>		
 	</div>
 </ul>
-<%= @cart.length %>
