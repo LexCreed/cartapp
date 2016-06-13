@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'send/index'
+
   resources :buy_orders
   devise_for :users
   
@@ -7,14 +9,13 @@ Rails.application.routes.draw do
   get '/cart/clear' => 'cart#clearCart'
   get '/cart/:id' => 'cart#add'
   post '/cart/' => 'cart#create'
-
+  get 'send' => 'send#index'
+  post 'send' => 'send#create'
+  
   resources :products
   root 'page#home'
-
   get 'page/about'
-
   get 'page/faqs'
-
   get 'page/contact'
 
   # The priority is based upon order of creation: first created -> highest priority.

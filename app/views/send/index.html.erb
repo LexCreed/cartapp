@@ -1,0 +1,52 @@
+  <div class="main-container col-xs-12">
+    <div class="box">
+      <div classs="" >
+        <h1 class="text-center col-xs-12">Contacto</h1>
+      </div> 
+      <div cloass="container form-group ">
+        <div class="text-left ">
+          <div class="main-container col-xs-12 ">
+
+			<%= form_tag send_path,method: :post do %>
+
+			<div class="form-group col-sm-6 text-inline">
+			<%= label_tag :name,'Nombre'%><br/>
+			<%= text_field_tag :name,""  , class:"form-control " %> <br/>
+				
+			</div>
+
+
+			<div class="form-group col-sm-6 text-inline">
+			<%= label_tag :email, 'Email'%> <br/>
+			<%= text_field_tag :email,"", class:"form-control " %> <br/>
+				
+			</div>
+
+
+			<div class="form-group col-sm-6 text-inline">
+			<%= label_tag :subject, 'Asunto'%> <br/>
+			<%= text_field_tag :subject,"" , class:"form-control "%> <br/>
+				
+			</div>
+
+			<div class="form-group col-sm-6 text-inline">
+			<%= label_tag :content, 'Contenido'%><br/>
+			<%= text_area_tag :content,"" , class:"form-control "%> <br/>
+				
+			</div>
+
+
+			<div class="form-group form-inline text-inline">
+			<%= submit_tag 'Enviar', class:"form-control "%>
+				
+			</div>
+
+			<% end %>
+
+
+         </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

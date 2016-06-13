@@ -1,25 +1,47 @@
-<h2>Change your password</h2>
+  <div class="main-container col-xs-12">
+    <div class="box">
+      <div classs="" >
+        <h1 class="text-center col-xs-12">Cambia tu contraseña</h1>
+      </div> 
+      <div cloass="container form-group ">
+        <div class="text-left ">
+          <div class="main-container col-xs-12 ">
+
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+  <%= f.hidden_field :reset_password_token, class:"form-control "  %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
+  <div class="form-group col-sm-6 text-inline">
+<h5>
+    <%= f.label :password, "Nueva contraseña" %>
     <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      (<%= @minimum_password_length %> caracteres minimos)</h5>
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+    <%= f.password_field :password, autofocus: true, autocomplete: "off", class:"form-control "  %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+
+  <div class="form-group col-sm-6 text-inline">
+   <h5> 
+    <%= f.label :password_confirmation, "Confirmar contraseña" %></h5>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control "  %>
+<br>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
+  <div class="form-group form-inline text-inline">
+    <%= f.submit "Cambiar", class:"form-control " %>
   </div>
 <% end %>
+  
+  <div class="col-xs-12 btn-lg text-center">
+  <%= render "devise/shared/links" %>
+  
+  </div>
 
-<%= render "devise/shared/links" %>
+         </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
